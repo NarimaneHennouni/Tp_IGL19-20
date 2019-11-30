@@ -1,0 +1,22 @@
+{
+  "name": "tp_igl19-20",
+  "version": "1.0.0",
+  "description": "",
+  "main": "essai.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/narimane00/Tp_IGL19-20.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/narimane00/Tp_IGL19-20/issues"
+  },
+  "homepage": "https://github.com/narimane00/Tp_IGL19-20#readme",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}
