@@ -1,11 +1,20 @@
 var mysql      = require('mysql');
 var http       = require('http');
+const express = require('express');
 var coeff,moys,nom_mod;
 var i=0;
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.end('Hello World!');
-}).listen(8080);
+app.get("/",(req,res)=>{
+  console.log("responding to root route");
+  res.send("Heelloo from ROOOOT");
+})
+app.get("/users",(req,res)=>{
+  console.log("responding to root route");
+  res.send("demon runnining");
+})
+
+app.listen(3000,()=>{
+  console.log("server is up and listnening");
+});
 var connection = mysql.createConnection({
     host     : 'localhost',
     database : 'tp_igl',
