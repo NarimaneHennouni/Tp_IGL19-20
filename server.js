@@ -35,3 +35,4 @@ app.use(bodyParser.json());
 
 var routes = require('./server-side/routes/approutes'); //importing route
 routes(app); //register the route
+module.exports=app;

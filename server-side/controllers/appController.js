@@ -1,5 +1,4 @@
 'use strict';
-
 var Question = require('../model/appModel.js');
 
 exports.list_all_questions = function(req,res) {
@@ -7,11 +6,9 @@ exports.list_all_questions = function(req,res) {
 
     console.log('controller')
     if (err) res.send(err);
-    res.json(question);      
+    res.json(question); 
   });
 };
-
-
 
 exports.create_a_question = function(req, res) {
   var new_ques = new Question(req.body.question);
@@ -33,7 +30,6 @@ else{
 }
 };
 
-
 exports.read_a_question = function(req, res) {
   Question.getQuestionById(req.params.quesId, function(err, question) {
     if (err)
@@ -41,3 +37,5 @@ exports.read_a_question = function(req, res) {
     res.json(question);
   });
 };
+
+

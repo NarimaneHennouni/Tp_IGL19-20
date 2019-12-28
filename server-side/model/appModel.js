@@ -6,6 +6,7 @@ var Question = function(question){
     //this.id_user = id_user connecté
     this.question = question.question;
 };
+
 Question.createQuestion = function (newQues, result) {    
         sql.query("INSERT INTO questions set ?", newQues, function (err, res) {
                 
@@ -39,11 +40,11 @@ Question.getAllquestions = function (result) {
                     result(null, err);
                 }
                 else{
-                  console.log('questions : ', res);  
-
-                 result(null,res);
+                  console.log('questions : ', res);                       
+                  result(null,res);
                 }
             });   
 };
+module.exports=Question
 
-module.exports= Question;
+
