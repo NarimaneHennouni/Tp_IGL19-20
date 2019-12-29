@@ -3,7 +3,9 @@ var http       = require('http');
 const express =  require('express');
 const app=express();
 var coeff,moys,nom_mod,moye,coefficient=[],final;
+var tab_moy=[];
 var i=0;
+var Moyf;
 app.get('/api',(req ,res)=>{
   const etudiants= final;
   res.json(etudiants);
@@ -31,9 +33,9 @@ connection.connect(function(err) {
 
 
 var module=[];
-module[0]='notes_anum';
-module[1]="notes_igl";
-module[2]="notes_res";
+module[2]='notes_anum';
+module[0]="notes_igl";
+module[1]="notes_res";
 module[3]="notes_thp";
 var moyenne=[];
 moyenne[0]="Moy_igl";
@@ -50,7 +52,7 @@ async function remplir(nom_mod,i,moye)
     coefficient[i]=results2[0].Coeff;
     console.log(coefficient[i]);
   })
-   connection.query("SELECT id_etud, CC, CI, TP, CF FROM "+nom_mod, function (error, results1, fields) {
+  var t= await connection.query("SELECT id_etud, CC, CI, TP, CF FROM "+nom_mod, function (error, results1, fields) {
     if (error)
         throw error;
         console.log(results1);
@@ -73,12 +75,29 @@ async function remplir(nom_mod,i,moye)
           console.log("inserted");
 
       }); 
-
-        });
+   
+        // add a query to fetch the data from oy etudiant and make as the return value in order to apply test on it
+        //
       
       
 });
+  
+/*var mysql5 = "SELECT Moy FROM notes_thp WHERE id_etud=17/0022";
+ connection.query("SELECT CC,Moy FROM notes_thp WHERE id_etud=16/1067", function (error, res, fields) {
+  if (error)
+      throw error;
+      console.log("am resultss", res);
+      tab_moy[i]=res[0].CC;
+      console.log("MOyennneee");
+      console.log(res[0].Moy);
+  });
+  
+});
+return tab_moy[i];*/
+});
 }
+
+
 async function calcul_moy_total()
 {
   var y =await connection.query("SELECT id_etud, Moy_IGL,Moy_RES,Moy_ANUM,Moy_THP FROM moy_etudiants", function (error, results, fields) {
@@ -94,6 +113,15 @@ async function calcul_moy_total()
          });
        })
       });
+ /*     connection.query("SELECT Moyf FROM moy_etudiants", function (error, results1, fields) {
+        if (error)
+            throw error;
+            console.log(results1);
+             Moyf =results1.Moyf;
+             console.log(Moyf);
+
+});
+ return Moyf;*/
 }
 
 async function classer(){
@@ -104,18 +132,28 @@ async function classer(){
     console.log(final);
     }
   );
+  return final;
 }
-/*for(i=0;i<4;i++){
+/*async function traitement()
+{
+for(i=0;i<4;i++){
   console.log("am in");
   nom_mod=module[i];
   moye=moyenne[i];
-  var y= remplir(nom_mod,i,moye);
+  var y= await remplir(nom_mod,i,moye);
+  console.log("am yyyyyyyyyyyyyyyyyyyyyyyyyyy");
+  console.log(y);
 }
-calcul_moy_total();*/
+var y=await calcul_moy_total();
+console.log("am 222222222222222222 yyyyyyyyyyyyyyyyyyyyyyyyyyy");
+console.log(y);*/
 classer();
+//}
+
+//traitement();
 
 
-
+module.exports = app;
 
 
 
