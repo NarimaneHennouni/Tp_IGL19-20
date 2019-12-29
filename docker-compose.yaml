@@ -1,0 +1,16 @@
+version: '3'
+services: 
+    forumesi:
+        container_name: forumesi-container
+        restart: always
+        build: .
+        ports:
+            - "3000:3000"
+        links:
+            - mysql
+    mysql:
+        container_name: mysql-container
+        image: mysql
+        ports: 
+            - "32769:3306"
+    
