@@ -1,17 +1,24 @@
 var mysql      = require('mysql');
 var http       = require('http');
 const express =  require('express');
-const app=express();
+//const axios = require('axios');
+const bodyParser = require("body-parser");
+const app= express();
 var coeff,moys,nom_mod,moye,coefficient=[],final;
 var tab_moy=[];
 var i=0;
 var Moyf;
+app.use(bodyParser.json());
+
 app.get('/api',(req ,res)=>{
   const etudiants= final;
-  res.json(etudiants);
-})
-
-app.listen(3003,()=>console.log("console satrted"));
+ return res.json(etudiants);
+});
+module.exports = app;
+/*axios.get("http://localhost:3000/api")
+.then(res => (res.data))
+.catch(err => 'error');*/
+//app.listen(3003,()=>console.log("console satrted"));
 
 
 var connection = mysql.createConnection({
@@ -113,15 +120,6 @@ async function calcul_moy_total()
          });
        })
       });
- /*     connection.query("SELECT Moyf FROM moy_etudiants", function (error, results1, fields) {
-        if (error)
-            throw error;
-            console.log(results1);
-             Moyf =results1.Moyf;
-             console.log(Moyf);
-
-});
- return Moyf;*/
 }
 
 async function classer(){
@@ -147,13 +145,14 @@ for(i=0;i<4;i++){
 var y=await calcul_moy_total();
 console.log("am 222222222222222222 yyyyyyyyyyyyyyyyyyyyyyyyyyy");
 console.log(y);*/
-classer();
+//var t = await
+ classer();
 //}
 
 //traitement();
 
 
-module.exports = app;
+
 
 
 
