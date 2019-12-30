@@ -1,0 +1,28 @@
+version: '3'
+
+services: 
+    db:
+        build: ./db
+        environment: 
+            MYSQL_DATABASE: forumesi
+            MYSQL_ROOT_PASSWORD: 123
+            MYSQL_USER: nour
+            MYSQL_PASSWORD: 123
+            DATABASE_HOST: db
+    forumesi:
+        build: .
+        environment: 
+            DATABASE_HOST: db
+            MYSQL_PORT: 3306
+            MYSQL_DATABASE: forumesi
+            MYSQL_USER: nour
+            MYSQL_PASSWORD: 123
+        ports:
+            - "3000:3000"
+        depends_on: 
+            - db
+        restart: on-failure
+        
+        
+    
+    

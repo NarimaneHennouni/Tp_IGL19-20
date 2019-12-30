@@ -2,7 +2,6 @@ const chai=require('chai');
 const axios=require('axios');
 const server=require('../server');
 const approute=require('../server-side/routes/approutes');
-//const functions=require('./functions');
 var todoList = require('../server-side/controllers/appController');
 let chaiHttp=require('chai-http');
 
