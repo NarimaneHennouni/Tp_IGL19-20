@@ -18,7 +18,8 @@ Question.createQuestion = function (newQues, result) {
                     console.log(res.insertId);
                     result(null, res.insertId);
                 }
-            });           
+            });  
+
 };
 Question.getQuestionById = function (quesId, result) {
         sql.query("Select question from questions where id_qst = ? ", quesId, function (err, res) {             
