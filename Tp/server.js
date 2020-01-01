@@ -1,33 +1,50 @@
+
+
 var mysql      = require('mysql');
 var http       = require('http');
 const express =  require('express');
 //const axios = require('axios');
 const bodyParser = require("body-parser");
+/**
+ * creates the express app
+ */
 const app= express();
+/**
+ * app module
+ * @module app
+ */
 var coeff,moys,nom_mod,moye,coefficient=[],final;
-var tab_moy=[];
+/**
+ * i
+ * {int} garde la trace pour parcourir la table de chaque module
+ */
 var i=0;
-var Moyf;
 app.use(bodyParser.json());
-
+/** 
+ * app.get()
+ * enables the route in order to give data to the front app using react
+*/
 app.get('/api',(req ,res)=>{
   const etudiants= final;
  return res.json(etudiants);
 });
 module.exports = app;
-/*axios.get("http://localhost:3000/api")
-.then(res => (res.data))
-.catch(err => 'error');*/
 //app.listen(3003,()=>console.log("console satrted"));
 
-
+/**
+ * used for the connection with database 'tp_igl'
+ */
 var connection = mysql.createConnection({
-    host     : 'localhost',
-    database : 'tp_igl',
-    user     : 'root',
-    password : '',
+  host            : process.env.DATABASE_HOST,
+  port            : process.env.MYSQL_PORT,
+  user            : process.env.MYSQL_USER,
+  password        : process.env.MYSQL_PASSWORD,
+  database        : process.env.MYSQL_DATABASE
 });
 
+/**
+ * enables the sql connection with the database
+ */
 connection.connect(function(err) {
     if (err) {
         console.error('Error connecting: ' + err.stack);
@@ -37,19 +54,34 @@ connection.connect(function(err) {
     console.log('Connected as id ' + connection.threadId);
 });
 
-
+/**
+ * @type {Array} contains names of the tables of the different subjects in the database
+ */
 
 var module=[];
 module[2]='notes_anum';
 module[0]="notes_igl";
 module[1]="notes_res";
 module[3]="notes_thp";
+/**
+ * {Array} contains names of averages of each subject in the db in order to fil the table 'moy_etudiants'
+ */
 var moyenne=[];
 moyenne[0]="Moy_igl";
 moyenne[1]="Moy_res";
 moyenne[2]="Moy_anum";
 moyenne[3]="Moy_thp";
+/**
+ * variable containing the preparation of the mysql query which brings formula's information about each subject
+ */
 var sql1="SELECT CC, CI, TP, CF, Coeff FROM modules WHERE id_module=?";
+/**
+ * @property {Function} remplir -fills the table 'moy_etudiants' with averages of each subject calculated by using marks of each student and the average formula of each subject
+ * @param {string} nom_mod -contains the name of the subject on which we want to apply th query
+ * @param {int} i -contains the subject id-1
+ * @param {string} moye -the name of the average's field correspending to this subject in order to insert the average
+ * @returns {void}
+ */
 async function remplir(nom_mod,i,moye)
 {
    var k= await connection.query(sql1,[i+1], function (error, results2, fields){
@@ -83,28 +115,18 @@ async function remplir(nom_mod,i,moye)
 
       }); 
    
-        // add a query to fetch the data from oy etudiant and make as the return value in order to apply test on it
-        //
-      
+       
       
 });
   
-/*var mysql5 = "SELECT Moy FROM notes_thp WHERE id_etud=17/0022";
- connection.query("SELECT CC,Moy FROM notes_thp WHERE id_etud=16/1067", function (error, res, fields) {
-  if (error)
-      throw error;
-      console.log("am resultss", res);
-      tab_moy[i]=res[0].CC;
-      console.log("MOyennneee");
-      console.log(res[0].Moy);
-  });
-  
-});
-return tab_moy[i];*/
+
 });
 }
 
-
+/**
+ * Calculates the general average of each student in the table 'moy_etudiants' and inserts the result in the field 'Moyf'
+ * @returns {void}
+ */
 async function calcul_moy_total()
 {
   var y =await connection.query("SELECT id_etud, Moy_IGL,Moy_RES,Moy_ANUM,Moy_THP FROM moy_etudiants", function (error, results, fields) {
@@ -121,7 +143,10 @@ async function calcul_moy_total()
        })
       });
 }
-
+/**
+ * orders the students following the descendant order of their averages
+ * @returns {void}
+ */
 async function classer(){
  await connection.query("SELECT id_etud, Moy_IGL,Moy_RES,Moy_ANUM,Moy_THP, Moyf FROM moy_etudiants ORDER BY Moyf DESC" , function (error, results) {
     if (error)
@@ -132,29 +157,13 @@ async function classer(){
   );
   return final;
 }
-/*async function traitement()
-{
+
 for(i=0;i<4;i++){
-  console.log("am in");
   nom_mod=module[i];
   moye=moyenne[i];
-  var y= await remplir(nom_mod,i,moye);
-  console.log("am yyyyyyyyyyyyyyyyyyyyyyyyyyy");
-  console.log(y);
+  var y= remplir(nom_mod,i,moye);
+  
 }
-var y=await calcul_moy_total();
-console.log("am 222222222222222222 yyyyyyyyyyyyyyyyyyyyyyyyyyy");
-console.log(y);*/
-//var t = await
+calcul_moy_total();
  classer();
-//}
 
-//traitement();
-
-
-
-
-
-
-
-//connection.end();

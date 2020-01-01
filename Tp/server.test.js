@@ -3,12 +3,16 @@ const app =require("./server.js");
 const supertest = require("supertest");
 const request = supertest(app);
 const axios= require('axios');
-
+/**
+ * recuperer les données de la base de donnée en utilisant axios
+ */
 function fetchEtudiants(){
     return axios.get(`http://localhost:3003/api`)
    .then(res => res.data)
    .catch(err => 'error')} 
-
+/**
+ * tester si les données récupérées sont conformes à ceux attendus
+ */
 test('server should return students and their marks ',async ()=>
 {
    //expect.assertions(1);
