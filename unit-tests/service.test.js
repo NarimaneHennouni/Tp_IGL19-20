@@ -18,7 +18,7 @@ chai.use(chaiHttp);
 function fetchQuestions(){
      return axios.get(`http://localhost:3000/forumesiquestions`)
     .then(res => res.data)
-    .catch(err => 'error')} 
+    .catch(err => 'error')}
 /**
  * @function test -compares the response with the expected result
  */
