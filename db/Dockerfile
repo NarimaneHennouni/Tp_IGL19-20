@@ -9,7 +9,9 @@ FROM mysql:5.7
 #ENV MYSQL_PASSWORD 123
 #ENV DATABASE_HOST db
 
-ADD ./sql-scripts/scripts.sql /docker-entrypoint-initdb.d
-
 EXPOSE 3306
+
+COPY ./sql-scripts/scripts.sql /docker-entrypoint-initdb.d/
+
+
 

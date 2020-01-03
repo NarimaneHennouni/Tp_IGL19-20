@@ -1,12 +1,31 @@
+/**
+ * This file contains methods that execute sql queries on the database
+ * @module server-side/model/appModel-js
+ */
 'user strict';
+/**
+ * @member sql -
+ * @description variable that establishes connection with the database
+ */
 var sql = require('./questions_db.js');
-
+/**
+ * @description constructor of the question
+ * @function Question 
+ * @param {string} question -content of the question
+ */
 //question object constructor
 var Question = function(question){
+    /**
+     * @member question
+     * @description content of the question
+     */
     //this.id_user = id_user connecté
     this.question = question.question;
 };
-
+/**
+ * @member {function} createQuestion
+ * @description inserts a new question into the database
+ */
 Question.createQuestion = function (newQues, result) {    
         sql.query("INSERT INTO questions set ?", newQues, function (err, res) {
                 
@@ -21,6 +40,10 @@ Question.createQuestion = function (newQues, result) {
             });  
 
 };
+/**
+ * @member {function} getQuestionById
+ * @description  displays details of a question
+ */
 Question.getQuestionById = function (quesId, result) {
         sql.query("Select question from questions where id_qst = ? ", quesId, function (err, res) {             
                 if(err) {
@@ -33,6 +56,10 @@ Question.getQuestionById = function (quesId, result) {
                 }
             });   
 };
+/**
+ * @member {function} getAllquestions
+ * @description displays all questions posted in the forum
+ */
 Question.getAllquestions = function (result) {
         sql.query("Select * from questions", function (err, res) {
 

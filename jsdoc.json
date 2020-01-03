@@ -1,0 +1,18 @@
+{
+    "source": {
+      "include":["server.js","automated-tests/test.js","client-side/src/App.js","client-side/src/components/Questions.js","client-side/src/components/QuestionForm.js","client-side/src/App.js","client-side/src/components/Questions.js","server-side/controllers/appController.js","server-side/model/appModel.js","server-side/routes/approutes.js","unit-tests/service.test.js"],
+      "includePattern": ".js$",
+      "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": ["plugins/markdown"],
+    "templates": {
+      "cleverLinks": true,
+      "monospaceLinks": true
+    },
+    "opts": {
+      "recurse": true,
+      "destination": "./docs/",
+      "template":"custom-template",
+      "tutorials":"./tutorials"
+    }
+  }

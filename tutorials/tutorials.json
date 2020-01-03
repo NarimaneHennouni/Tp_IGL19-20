@@ -1,0 +1,18 @@
+{
+    "express-app":{
+        "title":"Express app"
+    },
+    "react-app":{
+        "title":"React app"
+    }, 
+    "unit-test":{
+        "title": "Unit Test"
+    },   
+    "selenium-test":{
+        "title": "Automated Test"
+    },
+    "docker":{
+        "title": "Deployment on Docker"
+    }
+   
+}

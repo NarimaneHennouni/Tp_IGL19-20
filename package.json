@@ -2,10 +2,11 @@
   "name": "tp_igl19-20",
   "version": "1.0.0",
   "description": "soa application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -41,5 +42,6 @@
     "jsdoc": "^3.6.3",
     "mocha": "^6.2.2",
     "nodemon": "^2.0.1"
-  }
+  },
+  "proxy": "http://localhost:3003"
 }

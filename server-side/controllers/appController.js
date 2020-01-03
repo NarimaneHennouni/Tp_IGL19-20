@@ -1,6 +1,16 @@
+/**
+ * This file contains controllers of the different HTTP requests 
+ * @module server-side/controllers/appController-js
+ */
 'use strict';
+/**
+ * @member Question 
+ * @description Question object that handles HTTP requests (GET,GET:ID,POST)
+ */
 var Question = require('../model/appModel.js');
-
+/**
+ * @function list_all_questions -lists all questions posted in the forum
+ */
 exports.list_all_questions = function(req,res) {
   Question.getAllquestions(function(err, question) {
 
@@ -9,7 +19,9 @@ exports.list_all_questions = function(req,res) {
     res.json(question); 
   });
 };
-
+/**
+ * @function create_a_question -creates a new question and posts it in the forum
+ */
 exports.create_a_question = function(req, res) {
   var new_ques = new Question(req.body.question);
 
@@ -29,7 +41,9 @@ else{
   });
 }
 };
-
+/**
+ * @function read_a_question -displays a question and its related answers
+ */
 exports.read_a_question = function(req, res) {
   Question.getQuestionById(req.params.quesId, function(err, question) {
     if (err)
