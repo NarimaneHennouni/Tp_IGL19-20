@@ -42,6 +42,14 @@ var connection = mysql.createConnection({
   database        : process.env.MYSQL_DATABASE
 });
 
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  database : 'tp_igl',
+  user     : 'root',
+  password : '',
+});
+
+
 /**
  * enables the sql connection with the database
  */
