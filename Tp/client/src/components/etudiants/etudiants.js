@@ -18,6 +18,7 @@ componentDidMount(){
 
   render() {
     return(
+      <body class="bodye">
       <div >
       
         <section>
@@ -51,6 +52,7 @@ componentDidMount(){
       </div>
     </section>
       </div>
+      </body>
     );
 
   }

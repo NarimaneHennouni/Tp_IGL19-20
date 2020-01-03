@@ -42,10 +42,11 @@ h1{
   /* demo styles */
   
   @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-  body{
+  .bodye{
     background: -webkit-linear-gradient(left, #25c481, #25b7c4);
     background: linear-gradient(to right, #25c481, #25b7c4);
     font-family: 'Roboto', sans-serif;
+    height:100vh;
   }
   section{
     margin: 50px;
@@ -97,3 +98,24 @@ h1{
     counter-increment: section;
     content: counter(section);
   }
+  
+  .bodyh{
+    background-color: #54e0ecc4;
+    height: 100vh;
+  }
+
+  .containerh h1{
+    font-family: monospace;
+    font-size: 60px;
+    margin-top: 10px;
+    color: black;
+  }
+  .containerh{
+    padding-top: 100px;
+    padding-bottom: 80px;
+    padding-right: 100px;
+  }
+  .h{
+    color: black;
+    font-weight: bolder;
+}
