@@ -16,7 +16,7 @@ const express = require('express');
    * @member port 
    * @description specified port for the backend (3000)
    */
-  port = process.env.PORT || 3000;
+  //port = process.env.PORT || 3000;
 
 const mysql = require('mysql');
 /**
@@ -24,19 +24,23 @@ const mysql = require('mysql');
  * @type {Object}
  */
 
+ var connection = mysql.createConnection({
+  host            : process.env.DATABASE_HOST,
+  port            : process.env.MYSQL_PORT,
+  user            : process.env.MYSQL_USER,
+  password        : process.env.MYSQL_PASSWORD,
+  database        : process.env.MYSQL_DATABASE
+});
+
 var connection = mysql.createConnection({
   host            : 'localhost',
-//  port            : process.env.MYSQL_PORT,
   user            : 'root',
   password        : '',
   database        : 'forumesi'
 });
 
- // connect to database
- connection.connect();
- app.listen(port);
+//app.listen(3003,()=>console.log("console satrted"));
 
- /* for docker
  connection.connect(function(err) {
   if (err) {
       console.error('Error connecting: ' + err.stack);
@@ -44,10 +48,10 @@ var connection = mysql.createConnection({
   }
 
   console.log('Connected as id ' + connection.threadId);
-});*/
+});
 
 
-console.log('API server started on: ' + port);
+//console.log('API server started on: ' + port);
 
 /**
  * @member a_peace_of_code_that_fixes_CORS_ERROR
