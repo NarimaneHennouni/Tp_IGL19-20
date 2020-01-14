@@ -16,21 +16,13 @@ const express = require('express');
    * @member port 
    * @description specified port for the backend (3000)
    */
-  //port = process.env.PORT || 3000;
+  port = process.env.PORT || 3000;
 
 const mysql = require('mysql');
 /**
  * database's connection configurations
  * @type {Object}
  */
-
- var connection = mysql.createConnection({
-  host            : process.env.DATABASE_HOST,
-  port            : process.env.MYSQL_PORT,
-  user            : process.env.MYSQL_USER,
-  password        : process.env.MYSQL_PASSWORD,
-  database        : process.env.MYSQL_DATABASE
-});
 
 var connection = mysql.createConnection({
   host            : 'localhost',
@@ -39,16 +31,9 @@ var connection = mysql.createConnection({
   database        : 'forumesi'
 });
 
-//app.listen(3003,()=>console.log("console satrted"));
+app.listen(port);
 
- connection.connect(function(err) {
-  if (err) {
-      console.error('Error connecting: ' + err.stack);
-      return;
-  }
-
-  console.log('Connected as id ' + connection.threadId);
-});
+ connection.connect();
 
 
 //console.log('API server started on: ' + port);
